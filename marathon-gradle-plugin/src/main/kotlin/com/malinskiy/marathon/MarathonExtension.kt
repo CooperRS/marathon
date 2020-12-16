@@ -1,6 +1,5 @@
 package com.malinskiy.marathon
 
-import com.malinskiy.marathon.android.ScreenRecordConfiguration
 import com.malinskiy.marathon.android.VendorType
 import com.malinskiy.marathon.android.configuration.AllureConfiguration
 import com.malinskiy.marathon.android.configuration.SerialStrategy
@@ -98,6 +97,10 @@ open class MarathonExtension(project: Project) {
         instrumentationArgs = mutableMapOf<String, String>().also(block)
     }
 
+    fun screenRecordConfiguration(block: ScreenRecordConfiguration.() -> Unit) {
+        screenRecordConfiguration = ScreenRecordConfiguration().also(block)
+    }
+
     fun allureConfiguration(block: AllureConfiguration.() -> Unit) {
         allureConfiguration = AllureConfiguration().also(block)
     }
@@ -154,6 +157,12 @@ open class MarathonExtension(project: Project) {
     fun instrumentationArgs(closure: Closure<*>) {
         instrumentationArgs = mutableMapOf()
         closure.delegate = instrumentationArgs
+        closure.call()
+    }
+
+    fun screenRecordConfiguration(closure: Closure<*>) {
+        screenRecordConfiguration = ScreenRecordConfiguration()
+        closure.delegate = screenRecordConfiguration
         closure.call()
     }
 
