@@ -119,7 +119,7 @@ open class MarathonRunTask : DefaultTask(), VerificationTask {
         val testApplicationPmClear = extension.testApplicationPmClear ?: DEFAULT_APPLICATION_PM_CLEAR
         val adbInitTimeout = extension.adbInitTimeout ?: defaultInitTimeoutMillis
         val installOptions = extension.installOptions ?: DEFAULT_INSTALL_OPTIONS
-        val screenRecordConfiguration = extension.screenRecordConfiguration ?: ScreenRecordConfiguration()
+        val screenRecordConfiguration = extension.screenRecordConfiguration?.toStrategy() ?: ScreenRecordConfiguration()
         val serialStrategy = extension.serialStrategy ?: SerialStrategy.AUTOMATIC
         val waitForDevicesTimeoutMillis = extension.waitForDevicesTimeoutMillis ?: DEFAULT_WAIT_FOR_DEVICES_TIMEOUT
         val allureConfiguration = extension.allureConfiguration ?: DEFAULT_ALLURE_CONFIGURATION
